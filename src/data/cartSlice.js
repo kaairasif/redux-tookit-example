@@ -14,7 +14,7 @@ const cartSlice = createSlice({
       state.cartProductIds.splice(indexOfId, 1)
     },
     clearAllItems: (state) => {
-      state.cartProductIds = []
+      state.cartProductIds = [...state.cartProductIds]
     },
   },
 })

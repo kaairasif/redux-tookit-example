@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import cartSlice from '../data/cartSlice'
 import productList from '../data/productList.json'
@@ -12,6 +13,7 @@ const Cart = () => {
 
   return (
     <div className="cart">
+      <h2>Cart Page</h2>
       {cartProductData.length > 0 && (
         <div className="cart-product">
           <h3 className="header">Items in cart</h3>
@@ -30,9 +32,16 @@ const Cart = () => {
           ))}
 
           <footer className="text-center">
-            <button className="btn btn-primary" onClick={() => dispatch(clearAllItems())}>
-              CHECKOUT
-            </button>
+            {/* <button className="btn btn-primary" onClick={() => dispatch(clearAllItems())}> */}
+              
+              
+      
+
+            <NavLink to="/checkout" title="cart">
+               CHECKOUT
+            </NavLink>
+
+
           </footer>
         </div>
       )}

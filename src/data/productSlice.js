@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import productList from '../data/productList.json'
 
 export const fetchAllProducts = createAsyncThunk('fetch-all-products', async (apiUrl) => {
   const response = await fetch(apiUrl)
@@ -21,7 +22,10 @@ const productSlice = createSlice({
         state.fetchStatus = 'loading'
       })
       .addCase(fetchAllProducts.rejected, (state) => {
+        state.data = productList.products
         state.fetchStatus = 'error'
       })
   },
 })
+
+export default productSlice;
