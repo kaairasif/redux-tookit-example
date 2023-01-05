@@ -5,6 +5,7 @@ import productList from '../data/productList.json'
 const CheckOut = () => {
 
     const { cartProductIds } = useSelector((state) => state.cart)
+    const count = useSelector( (state) => state.counter.count)
     const cartProductData = productList.products.filter((product) => cartProductIds.includes(product.id))
 
     const { removeFromCart, clearAllItems } = cartSlice.actions
@@ -13,14 +14,14 @@ const CheckOut = () => {
   
     const calculateSum = (array) => {
         return array.reduce((accumulator, value) => {
-          return accumulator + value;
+          return (accumulator + value) * (count > 0 ? count : 1);
         }, 0);
       }
-      
+
 
     return (
         <div className="cart">
-         <h2>Checkout page</h2>
+         <h2>Checkout page:</h2>
 
         {cartProductData.length > 0 && (
           <div className="cart-product">
@@ -39,16 +40,17 @@ const CheckOut = () => {
                   <h2>${product.price}</h2>
               
                   <span style={{ display: "none" }} >{ 
-                    totalPrice.push(product.price)
+                    totalPrice.push(product.price)                  
                     } </span>
 
                 </div>
               </div>
             ))}
-            {/* <h1>total Price : {totalPrice}</h1> */}
+            
 
-           <h1>Total price:  ${calculateSum(totalPrice) }
-      
+           <h1>Total price: ${calculateSum(totalPrice)}  
+           {/* ${calculateSum(totalPrice)} {count} */}
+    
       
       </h1>
             <footer className="text-center">
